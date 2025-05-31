@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -51,7 +50,7 @@ const OffPlatformTracker = () => {
     cleanerId: '',
     cleanerName: '',
     studentName: '',
-    incidentType: 'other' as const,
+    incidentType: 'other' as OffPlatformIncident['incidentType'],
     description: ''
   });
 
@@ -67,6 +66,10 @@ const OffPlatformTracker = () => {
       return;
     }
 
+    // Determine severity based on incident type
+    const severity: OffPlatformIncident['severity'] = 
+      newIncident.incidentType === 'direct_contact_request' ? 'high' : 'medium';
+
     const incident: OffPlatformIncident = {
       id: Date.now().toString(),
       cleanerId: newIncident.cleanerId,
@@ -76,7 +79,7 @@ const OffPlatformTracker = () => {
       description: newIncident.description,
       reportedAt: new Date().toLocaleString(),
       status: 'open',
-      severity: newIncident.incidentType === 'direct_contact_request' ? 'high' : 'medium'
+      severity
     };
 
     setIncidents(prev => [incident, ...prev]);
@@ -188,7 +191,7 @@ const OffPlatformTracker = () => {
                 id="incidentType"
                 className="w-full p-2 border border-gray-300 rounded-md"
                 value={newIncident.incidentType}
-                onChange={(e) => setNewIncident(prev => ({ ...prev, incidentType: e.target.value as any }))}
+                onChange={(e) => setNewIncident(prev => ({ ...prev, incidentType: e.target.value as OffPlatformIncident['incidentType'] }))}
               >
                 <option value="direct_contact_request">Direct Contact Request</option>
                 <option value="bypassed_platform">Bypassed Platform</option>
