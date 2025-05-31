@@ -2,8 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
-import { Users, Calendar, DollarSign, Star, ArrowLeft, UserCheck, Clock, TrendingUp } from "lucide-react";
+import { Users, Calendar, DollarSign, Star, ArrowLeft, UserCheck, Clock, TrendingUp, MessageSquare, Shield, QrCode, Flag } from "lucide-react";
 import { useState } from "react";
+import SmsNotificationSystem from "./SmsNotificationSystem";
+import CleanerVerificationSystem from "./CleanerVerificationSystem";
+import OffPlatformTracker from "./OffPlatformTracker";
+import BadgeTicketSystem from "./BadgeTicketSystem";
 
 interface AdminDashboardProps {
   onBack: () => void;
@@ -85,6 +89,10 @@ const AdminDashboard = ({ onBack }: AdminDashboardProps) => {
     { id: 'users', label: 'User Management', icon: Users },
     { id: 'bookings', label: 'Bookings', icon: Calendar },
     { id: 'applications', label: 'Cleaner Applications', icon: UserCheck },
+    { id: 'sms', label: 'SMS Notifications', icon: MessageSquare },
+    { id: 'verification', label: 'Cleaner Verification', icon: Shield },
+    { id: 'tickets', label: 'Badge & Tickets', icon: QrCode },
+    { id: 'incidents', label: 'Off-Platform Tracker', icon: Flag },
     { id: 'reviews', label: 'Reviews & Ratings', icon: Star },
     { id: 'payments', label: 'Payments & Payouts', icon: DollarSign },
   ];
@@ -292,8 +300,20 @@ const AdminDashboard = ({ onBack }: AdminDashboardProps) => {
           </div>
         )}
 
-        {/* Other tabs content placeholders */}
-        {activeTab !== 'overview' && (
+        {/* New SMS Notifications Tab */}
+        {activeTab === 'sms' && <SmsNotificationSystem />}
+        
+        {/* New Cleaner Verification Tab */}
+        {activeTab === 'verification' && <CleanerVerificationSystem />}
+        
+        {/* New Badge & Tickets Tab */}
+        {activeTab === 'tickets' && <BadgeTicketSystem />}
+        
+        {/* New Off-Platform Tracker Tab */}
+        {activeTab === 'incidents' && <OffPlatformTracker />}
+
+        {/* Other existing tabs content placeholders */}
+        {(activeTab === 'users' || activeTab === 'bookings' || activeTab === 'applications' || activeTab === 'reviews' || activeTab === 'payments') && (
           <Card>
             <CardHeader>
               <CardTitle>
