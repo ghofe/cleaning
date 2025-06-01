@@ -4,6 +4,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Star, User, DollarSign, Users, Settings, ArrowLeft, CheckCircle } from "lucide-react";
 import { useState } from "react";
+import CleanerMyBookings from "./cleaner/MyBookings";
+import Availability from "./cleaner/Availability";
+import Earnings from "./cleaner/Earnings";
+import TeamManagement from "./cleaner/TeamManagement";
+import CleanerProfile from "./cleaner/CleanerProfile";
 
 interface CleanerDashboardProps {
   onBack: () => void;
@@ -263,39 +268,11 @@ const CleanerDashboard = ({ onBack }: CleanerDashboardProps) => {
           </div>
         )}
 
-        {/* Other tabs content placeholders */}
-        {activeTab !== 'dashboard' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>
-                {activeTab === 'bookings' && 'My Bookings'}
-                {activeTab === 'availability' && 'Availability Settings'}
-                {activeTab === 'earnings' && 'Earnings Details'}
-                {activeTab === 'team' && 'Team Management'}
-                {activeTab === 'profile' && 'Profile Settings'}
-              </CardTitle>
-              <CardDescription>
-                {activeTab === 'bookings' && 'View and manage all your cleaning appointments'}
-                {activeTab === 'availability' && 'Set your working hours and availability'}
-                {activeTab === 'earnings' && 'Track your earnings and payment history'}
-                {activeTab === 'team' && 'Manage your cleaning team members'}
-                {activeTab === 'profile' && 'Update your profile and preferences'}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12">
-                <div className="h-16 w-16 text-gray-400 mx-auto mb-4">
-                  {activeTab === 'bookings' && <Calendar className="h-16 w-16" />}
-                  {activeTab === 'availability' && <Settings className="h-16 w-16" />}
-                  {activeTab === 'earnings' && <DollarSign className="h-16 w-16" />}
-                  {activeTab === 'team' && <Users className="h-16 w-16" />}
-                  {activeTab === 'profile' && <User className="h-16 w-16" />}
-                </div>
-                <p className="text-gray-500">This section is coming soon...</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+        {activeTab === 'bookings' && <CleanerMyBookings />}
+        {activeTab === 'availability' && <Availability />}
+        {activeTab === 'earnings' && <Earnings />}
+        {activeTab === 'team' && <TeamManagement />}
+        {activeTab === 'profile' && <CleanerProfile />}
       </div>
     </div>
   );
