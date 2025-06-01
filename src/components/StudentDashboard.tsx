@@ -1,10 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Star, User, BookOpen, MessageSquare, Settings, ArrowLeft, Plus } from "lucide-react";
 import { useState } from "react";
+import BookCleaner from "./student/BookCleaner";
+import MyBookings from "./student/MyBookings";
+import Reviews from "./student/Reviews";
+import Profile from "./student/Profile";
+import Support from "./student/Support";
 
 interface StudentDashboardProps {
   onBack: () => void;
@@ -222,80 +226,11 @@ const StudentDashboard = ({ onBack }: StudentDashboardProps) => {
           </div>
         )}
 
-        {activeTab === 'book' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Book a Cleaner</CardTitle>
-              <CardDescription>Select your cleaning preferences and find the perfect cleaner</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12">
-                <Calendar className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">Booking interface coming soon...</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {activeTab === 'bookings' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>My Bookings</CardTitle>
-              <CardDescription>View and manage all your cleaning appointments</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12">
-                <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">Bookings management coming soon...</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {activeTab === 'reviews' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Reviews</CardTitle>
-              <CardDescription>Rate your cleaning experiences</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12">
-                <Star className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">Reviews section coming soon...</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {activeTab === 'profile' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Profile Settings</CardTitle>
-              <CardDescription>Manage your account information</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12">
-                <User className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">Profile settings coming soon...</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {activeTab === 'support' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Support & Help</CardTitle>
-              <CardDescription>Get help with your bookings and account</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-12">
-                <MessageSquare className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">Support chat coming soon...</p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+        {activeTab === 'book' && <BookCleaner />}
+        {activeTab === 'bookings' && <MyBookings />}
+        {activeTab === 'reviews' && <Reviews />}
+        {activeTab === 'profile' && <Profile />}
+        {activeTab === 'support' && <Support />}
       </div>
     </div>
   );
