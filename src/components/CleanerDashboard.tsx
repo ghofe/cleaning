@@ -2,13 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, Star, User, DollarSign, Users, Settings, ArrowLeft, CheckCircle } from "lucide-react";
+import { Calendar, Clock, Star, User, DollarSign, Users, Settings, ArrowLeft, CheckCircle, Route, Package } from "lucide-react";
 import { useState } from "react";
 import CleanerMyBookings from "./cleaner/MyBookings";
 import Availability from "./cleaner/Availability";
 import Earnings from "./cleaner/Earnings";
 import TeamManagement from "./cleaner/TeamManagement";
 import CleanerProfile from "./cleaner/CleanerProfile";
+import RouteOptimization from "./cleaner/RouteOptimization";
+import InventoryManagement from "./cleaner/InventoryManagement";
 
 interface CleanerDashboardProps {
   onBack: () => void;
@@ -52,6 +54,8 @@ const CleanerDashboard = ({ onBack }: CleanerDashboardProps) => {
   const sidebarItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Calendar },
     { id: 'bookings', label: 'My Bookings', icon: Clock },
+    { id: 'route', label: 'Route Optimization', icon: Route },
+    { id: 'inventory', label: 'Inventory', icon: Package },
     { id: 'availability', label: 'Availability', icon: Settings },
     { id: 'earnings', label: 'Earnings', icon: DollarSign },
     { id: 'team', label: 'Team Management', icon: Users },
@@ -269,6 +273,8 @@ const CleanerDashboard = ({ onBack }: CleanerDashboardProps) => {
         )}
 
         {activeTab === 'bookings' && <CleanerMyBookings />}
+        {activeTab === 'route' && <RouteOptimization />}
+        {activeTab === 'inventory' && <InventoryManagement />}
         {activeTab === 'availability' && <Availability />}
         {activeTab === 'earnings' && <Earnings />}
         {activeTab === 'team' && <TeamManagement />}

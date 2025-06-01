@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import AdminSidebar from "./admin/AdminSidebar";
 import AdminDashboardOverview from "./admin/AdminDashboardOverview";
@@ -12,6 +11,8 @@ import BookingsManagement from "./admin/BookingsManagement";
 import CleanerApplications from "./admin/CleanerApplications";
 import ReviewsRatings from "./admin/ReviewsRatings";
 import PaymentsPayouts from "./admin/PaymentsPayouts";
+import AdvancedAnalytics from "./admin/AdvancedAnalytics";
+import DisputeResolution from "./admin/DisputeResolution";
 
 interface AdminDashboardProps {
   onBack: () => void;
@@ -32,9 +33,11 @@ const AdminDashboard = ({ onBack }: AdminDashboardProps) => {
       {/* Main Content */}
       <div className="flex-1 p-8">
         {activeTab === 'overview' && <AdminDashboardOverview />}
+        {activeTab === 'analytics' && <AdvancedAnalytics />}
         {activeTab === 'users' && <UserManagement />}
         {activeTab === 'bookings' && <BookingsManagement />}
         {activeTab === 'applications' && <CleanerApplications />}
+        {activeTab === 'disputes' && <DisputeResolution />}
         {activeTab === 'sms' && <SmsNotificationSystem />}
         {activeTab === 'verification' && <CleanerVerificationSystem />}
         {activeTab === 'tickets' && <BadgeTicketSystem />}

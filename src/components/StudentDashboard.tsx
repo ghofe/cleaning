@@ -2,13 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, Star, User, BookOpen, MessageSquare, Settings, ArrowLeft, Plus } from "lucide-react";
+import { Calendar, Clock, Star, User, BookOpen, MessageSquare, Settings, ArrowLeft, Plus, Route, Gift, Repeat } from "lucide-react";
 import { useState } from "react";
 import BookCleaner from "./student/BookCleaner";
 import MyBookings from "./student/MyBookings";
 import Reviews from "./student/Reviews";
 import Profile from "./student/Profile";
 import Support from "./student/Support";
+import LiveTracking from "./student/LiveTracking";
+import RecurringBookings from "./student/RecurringBookings";
+import LoyaltyRewards from "./student/LoyaltyRewards";
+import ChatSystem from "./messaging/ChatSystem";
 
 interface StudentDashboardProps {
   onBack: () => void;
@@ -59,7 +63,11 @@ const StudentDashboard = ({ onBack }: StudentDashboardProps) => {
     { id: 'dashboard', label: 'Dashboard', icon: BookOpen },
     { id: 'book', label: 'Book Cleaner', icon: Plus },
     { id: 'bookings', label: 'My Bookings', icon: Calendar },
+    { id: 'recurring', label: 'Recurring Bookings', icon: Repeat },
+    { id: 'tracking', label: 'Live Tracking', icon: Route },
+    { id: 'loyalty', label: 'Loyalty & Rewards', icon: Gift },
     { id: 'reviews', label: 'Reviews', icon: Star },
+    { id: 'messages', label: 'Messages', icon: MessageSquare },
     { id: 'profile', label: 'Profile', icon: User },
     { id: 'support', label: 'Support', icon: MessageSquare },
   ];
@@ -228,7 +236,18 @@ const StudentDashboard = ({ onBack }: StudentDashboardProps) => {
 
         {activeTab === 'book' && <BookCleaner />}
         {activeTab === 'bookings' && <MyBookings />}
+        {activeTab === 'recurring' && <RecurringBookings />}
+        {activeTab === 'tracking' && <LiveTracking />}
+        {activeTab === 'loyalty' && <LoyaltyRewards />}
         {activeTab === 'reviews' && <Reviews />}
+        {activeTab === 'messages' && (
+          <ChatSystem 
+            bookingId="BK-12345" 
+            userType="student" 
+            recipientName="Jane Wanjiku"
+            recipientAvatar="/placeholder.svg"
+          />
+        )}
         {activeTab === 'profile' && <Profile />}
         {activeTab === 'support' && <Support />}
       </div>

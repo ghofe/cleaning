@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, TrendingUp, Users, Calendar, UserCheck, MessageSquare, Shield, QrCode, Flag, Star, DollarSign } from "lucide-react";
+import { ArrowLeft, BarChart3, Users, Calendar, UserCheck, MessageSquare, Shield, AlertTriangle, Star, CreditCard, FileText, TrendingUp, Scale } from "lucide-react";
 
 interface AdminSidebarProps {
   activeTab: string;
@@ -10,16 +10,18 @@ interface AdminSidebarProps {
 
 const AdminSidebar = ({ activeTab, setActiveTab, onBack }: AdminSidebarProps) => {
   const sidebarItems = [
-    { id: 'overview', label: 'Dashboard Overview', icon: TrendingUp },
+    { id: 'overview', label: 'Overview', icon: BarChart3 },
+    { id: 'analytics', label: 'Advanced Analytics', icon: TrendingUp },
     { id: 'users', label: 'User Management', icon: Users },
     { id: 'bookings', label: 'Bookings', icon: Calendar },
     { id: 'applications', label: 'Cleaner Applications', icon: UserCheck },
-    { id: 'sms', label: 'SMS Notifications', icon: MessageSquare },
-    { id: 'verification', label: 'Cleaner Verification', icon: Shield },
-    { id: 'tickets', label: 'Badge & Tickets', icon: QrCode },
-    { id: 'incidents', label: 'Off-Platform Tracker', icon: Flag },
+    { id: 'disputes', label: 'Dispute Resolution', icon: Scale },
     { id: 'reviews', label: 'Reviews & Ratings', icon: Star },
-    { id: 'payments', label: 'Payments & Payouts', icon: DollarSign },
+    { id: 'payments', label: 'Payments & Payouts', icon: CreditCard },
+    { id: 'sms', label: 'SMS Notifications', icon: MessageSquare },
+    { id: 'verification', label: 'Verification', icon: Shield },
+    { id: 'tickets', label: 'Support Tickets', icon: FileText },
+    { id: 'incidents', label: 'Off-Platform Tracker', icon: AlertTriangle },
   ];
 
   return (
@@ -34,7 +36,7 @@ const AdminSidebar = ({ activeTab, setActiveTab, onBack }: AdminSidebarProps) =>
           Back to Home
         </Button>
         <div>
-          <h2 className="text-xl font-bold text-blue-900">Admin Portal</h2>
+          <h2 className="text-xl font-bold">Admin Portal</h2>
           <p className="text-sm text-gray-500">Campus Clean Management</p>
         </div>
       </div>
