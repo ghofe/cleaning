@@ -12,30 +12,17 @@ const Index = () => {
   const { user } = useAuth();
   const [selectedDashboard, setSelectedDashboard] = useState<string | null>(null);
 
-  // If user is authenticated and has a role, show their dashboard directly
-  if (user && user.role && !selectedDashboard) {
-    if (user.role === 'student') {
-      return <StudentDashboard onBack={() => setSelectedDashboard(null)} />;
-    }
-    if (user.role === 'cleaner') {
-      return <CleanerDashboard onBack={() => setSelectedDashboard(null)} />;
-    }
-    if (user.role === 'admin') {
-      return <AdminDashboard onBack={() => setSelectedDashboard(null)} />;
-    }
+  // Show selected dashboard or user's default dashboard
+  if (selectedDashboard === 'student' || (user?.role === 'student' && selectedDashboard !== 'home')) {
+    return <StudentDashboard onBack={() => setSelectedDashboard('home')} />;
   }
 
-  // Show dashboard selection if user wants to switch or if no role is set
-  if (selectedDashboard === 'student') {
-    return <StudentDashboard onBack={() => setSelectedDashboard(null)} />;
+  if (selectedDashboard === 'cleaner' || (user?.role === 'cleaner' && selectedDashboard !== 'home')) {
+    return <CleanerDashboard onBack={() => setSelectedDashboard('home')} />;
   }
 
-  if (selectedDashboard === 'cleaner') {
-    return <CleanerDashboard onBack={() => setSelectedDashboard(null)} />;
-  }
-
-  if (selectedDashboard === 'admin') {
-    return <AdminDashboard onBack={() => setSelectedDashboard(null)} />;
+  if (selectedDashboard === 'admin' || (user?.role === 'admin' && selectedDashboard !== 'home')) {
+    return <AdminDashboard onBack={() => setSelectedDashboard('home')} />;
   }
 
   return (
@@ -55,6 +42,12 @@ const Index = () => {
             <div className="mb-8 p-4 bg-white rounded-lg shadow-md max-w-md mx-auto">
               <p className="text-sm text-gray-600">Welcome back, {user.name}!</p>
               <p className="text-sm text-blue-600">Role: {user.role}</p>
+              <Button 
+                className="mt-2"
+                onClick={() => setSelectedDashboard(user.role)}
+              >
+                Go to My Dashboard
+              </Button>
             </div>
           )}
         </div>
