@@ -53,7 +53,7 @@ const InventoryManagement = () => {
       cost: 100,
       lastRestocked: "2024-05-20"
     }
-  ];
+  ]);
 
   const updateQuantity = (id: number, change: number) => {
     setSupplies(prev => prev.map(item => 
