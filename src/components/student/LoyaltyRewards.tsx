@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -107,7 +106,7 @@ const LoyaltyRewards = () => {
                 <h3 className="font-semibold">{tier.name}</h3>
                 <p className="text-xs text-gray-500">{tier.min}+ points</p>
                 {tier.name === currentTier && (
-                  <Badge className="mt-2" size="sm">Current</Badge>
+                  <Badge className="mt-2">Current</Badge>
                 )}
               </div>
             ))}
