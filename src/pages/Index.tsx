@@ -12,17 +12,17 @@ const Index = () => {
   const { user } = useAuth();
   const [selectedDashboard, setSelectedDashboard] = useState<string | null>(null);
 
-  // Show selected dashboard or user's default dashboard
-  if (selectedDashboard === 'student' || (user?.role === 'student' && selectedDashboard !== 'home')) {
-    return <StudentDashboard onBack={() => setSelectedDashboard('home')} />;
+  // Show selected dashboard
+  if (selectedDashboard === 'student') {
+    return <StudentDashboard onBack={() => setSelectedDashboard(null)} />;
   }
 
-  if (selectedDashboard === 'cleaner' || (user?.role === 'cleaner' && selectedDashboard !== 'home')) {
-    return <CleanerDashboard onBack={() => setSelectedDashboard('home')} />;
+  if (selectedDashboard === 'cleaner') {
+    return <CleanerDashboard onBack={() => setSelectedDashboard(null)} />;
   }
 
-  if (selectedDashboard === 'admin' || (user?.role === 'admin' && selectedDashboard !== 'home')) {
-    return <AdminDashboard onBack={() => setSelectedDashboard('home')} />;
+  if (selectedDashboard === 'admin') {
+    return <AdminDashboard onBack={() => setSelectedDashboard(null)} />;
   }
 
   return (
@@ -30,9 +30,14 @@ const Index = () => {
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            CleanCampus
-          </h1>
+          <div className="flex items-center justify-center mb-6">
+            <div className="bg-blue-600 text-white p-4 rounded-full mr-4">
+              <Shield className="h-12 w-12" />
+            </div>
+            <h1 className="text-5xl font-bold text-gray-900">
+              CleanCampus
+            </h1>
+          </div>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Revolutionary cleaning service platform connecting students with trusted professional cleaners. 
             Experience seamless booking, real-time tracking, and premium quality service.
