@@ -31,9 +31,11 @@ const Index = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-6">
-            <div className="bg-blue-600 text-white p-4 rounded-full mr-4">
-              <Shield className="h-12 w-12" />
-            </div>
+            <img 
+              src="/lovable-uploads/8c321e35-db19-4660-acb4-90f2e30e158b.png" 
+              alt="CleanCampus Logo" 
+              className="h-16 w-16 mr-4"
+            />
             <h1 className="text-5xl font-bold text-gray-900">
               CleanCampus
             </h1>
