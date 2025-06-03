@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from './AuthProvider';
-import { Eye, EyeOff, Shield } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,10 +34,14 @@ const LoginForm = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="flex items-center justify-center space-x-2">
-            <Shield className="h-6 w-6 text-blue-600" />
-            <span>CleanCampus Hub</span>
-          </CardTitle>
+          <div className="flex items-center justify-center mb-4">
+            <img 
+              src="/lovable-uploads/8c321e35-db19-4660-acb4-90f2e30e158b.png" 
+              alt="CampusClean Logo" 
+              className="h-12 w-12 mr-2 object-contain"
+            />
+            <CardTitle className="text-2xl">CampusClean</CardTitle>
+          </div>
           <CardDescription>Secure university cleaning service platform</CardDescription>
         </CardHeader>
         <CardContent>

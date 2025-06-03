@@ -12,7 +12,7 @@ const Index = () => {
   const { user } = useAuth();
   const [selectedDashboard, setSelectedDashboard] = useState<string | null>(null);
 
-  // Show selected dashboard
+  // Show selected dashboard based on user selection, not user role
   if (selectedDashboard === 'student') {
     return <StudentDashboard onBack={() => setSelectedDashboard(null)} />;
   }
@@ -33,11 +33,11 @@ const Index = () => {
           <div className="flex items-center justify-center mb-6">
             <img 
               src="/lovable-uploads/8c321e35-db19-4660-acb4-90f2e30e158b.png" 
-              alt="CleanCampus Logo" 
-              className="h-16 w-16 mr-4"
+              alt="CampusClean Logo" 
+              className="h-20 w-20 mr-4 object-contain"
             />
             <h1 className="text-5xl font-bold text-gray-900">
-              CleanCampus
+              CampusClean
             </h1>
           </div>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">

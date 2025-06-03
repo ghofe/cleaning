@@ -70,8 +70,13 @@ const EnhancedDashboard = () => {
       <header className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
+            <img 
+              src="/lovable-uploads/8c321e35-db19-4660-acb4-90f2e30e158b.png" 
+              alt="CampusClean Logo" 
+              className="h-8 w-8 object-contain"
+            />
             <h1 className="text-2xl font-bold text-gray-900">
-              CleanCampus Hub
+              CampusClean Hub
             </h1>
             <Badge variant="outline" className="text-sm">
               {user.role.charAt(0).toUpperCase() + user.role.slice(1)} Dashboard
