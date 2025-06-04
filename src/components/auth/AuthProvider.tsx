@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -6,17 +5,19 @@ interface User {
   id: string;
   email: string;
   name: string;
-  role: 'student' | 'cleaner' | 'admin';
+  role: 'student' | 'cleaner' | 'admin' | 'company';
   avatar?: string;
   phone?: string;
   verified: boolean;
+  companyName?: string;
+  companyLicense?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, name: string, role: 'student' | 'cleaner') => Promise<void>;
+  register: (email: string, password: string, name: string, role: 'student' | 'cleaner' | 'company', companyData?: { companyName: string; companyLicense: string }) => Promise<void>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<void>;
 }
@@ -43,12 +44,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      let role: 'student' | 'cleaner' | 'admin' | 'company' = 'student';
+      if (email.includes('admin')) role = 'admin';
+      else if (email.includes('cleaner')) role = 'cleaner';
+      else if (email.includes('company')) role = 'company';
+      
       const mockUser: User = {
         id: '1',
         email,
         name: email.split('@')[0],
-        role: email.includes('admin') ? 'admin' : email.includes('cleaner') ? 'cleaner' : 'student',
-        verified: true
+        role,
+        verified: true,
+        ...(role === 'company' && {
+          companyName: 'CleanCorp Services',
+          companyLicense: 'LIC-2024-001'
+        })
       };
 
       setUser(mockUser);
@@ -69,7 +79,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const register = async (email: string, password: string, name: string, role: 'student' | 'cleaner') => {
+  const register = async (
+    email: string, 
+    password: string, 
+    name: string, 
+    role: 'student' | 'cleaner' | 'company',
+    companyData?: { companyName: string; companyLicense: string }
+  ) => {
     setIsLoading(true);
     try {
       // Simulate API call
@@ -80,7 +96,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         email,
         name,
         role,
-        verified: false
+        verified: false,
+        ...(role === 'company' && companyData && {
+          companyName: companyData.companyName,
+          companyLicense: companyData.companyLicense
+        })
       };
 
       setUser(newUser);
@@ -88,7 +108,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       
       toast({
         title: "Registration Successful",
-        description: "Please verify your email to complete registration."
+        description: role === 'company' 
+          ? "Company registration successful. Please verify your business license."
+          : "Please verify your email to complete registration."
       });
     } catch (error) {
       toast({

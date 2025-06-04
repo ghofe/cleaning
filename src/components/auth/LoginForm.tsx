@@ -16,7 +16,9 @@ const LoginForm = () => {
     email: '', 
     password: '', 
     name: '', 
-    role: 'student' as 'student' | 'cleaner' 
+    role: 'student' as 'student' | 'cleaner' | 'company',
+    companyName: '',
+    companyLicense: ''
   });
   const { login, register, isLoading } = useAuth();
 
@@ -27,7 +29,17 @@ const LoginForm = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    await register(registerData.email, registerData.password, registerData.name, registerData.role);
+    const companyData = registerData.role === 'company' 
+      ? { companyName: registerData.companyName, companyLicense: registerData.companyLicense }
+      : undefined;
+    
+    await register(
+      registerData.email, 
+      registerData.password, 
+      registerData.name, 
+      registerData.role,
+      companyData
+    );
   };
 
   return (
@@ -93,7 +105,24 @@ const LoginForm = () => {
             <TabsContent value="register">
               <form onSubmit={handleRegister} className="space-y-4">
                 <div>
-                  <Label htmlFor="reg-name">Full Name</Label>
+                  <Label htmlFor="role">I am a</Label>
+                  <Select value={registerData.role} onValueChange={(value: 'student' | 'cleaner' | 'company') => 
+                    setRegisterData(prev => ({ ...prev, role: value }))}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="student">Student</SelectItem>
+                      <SelectItem value="cleaner">Individual Cleaner</SelectItem>
+                      <SelectItem value="company">Cleaning Company</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <Label htmlFor="reg-name">
+                    {registerData.role === 'company' ? 'Contact Person Name' : 'Full Name'}
+                  </Label>
                   <Input
                     id="reg-name"
                     value={registerData.name}
@@ -101,6 +130,30 @@ const LoginForm = () => {
                     required
                   />
                 </div>
+
+                {registerData.role === 'company' && (
+                  <>
+                    <div>
+                      <Label htmlFor="company-name">Company Name</Label>
+                      <Input
+                        id="company-name"
+                        value={registerData.companyName}
+                        onChange={(e) => setRegisterData(prev => ({ ...prev, companyName: e.target.value }))}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="company-license">Business License Number</Label>
+                      <Input
+                        id="company-license"
+                        value={registerData.companyLicense}
+                        onChange={(e) => setRegisterData(prev => ({ ...prev, companyLicense: e.target.value }))}
+                        required
+                      />
+                    </div>
+                  </>
+                )}
+
                 <div>
                   <Label htmlFor="reg-email">Email</Label>
                   <Input
@@ -120,19 +173,6 @@ const LoginForm = () => {
                     onChange={(e) => setRegisterData(prev => ({ ...prev, password: e.target.value }))}
                     required
                   />
-                </div>
-                <div>
-                  <Label htmlFor="role">I am a</Label>
-                  <Select value={registerData.role} onValueChange={(value: 'student' | 'cleaner') => 
-                    setRegisterData(prev => ({ ...prev, role: value }))}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="student">Student</SelectItem>
-                      <SelectItem value="cleaner">Cleaner</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? "Creating account..." : "Create Account"}

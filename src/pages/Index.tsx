@@ -1,12 +1,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Calendar, Star, Clock, MapPin, Shield } from "lucide-react";
+import { Users, Calendar, Star, Clock, MapPin, Shield, Building } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/components/auth/AuthProvider";
 import StudentDashboard from "@/components/StudentDashboard";
 import CleanerDashboard from "@/components/CleanerDashboard";
 import AdminDashboard from "@/components/AdminDashboard";
+import CompanyDashboard from "@/components/CompanyDashboard";
 
 const Index = () => {
   const { user } = useAuth();
@@ -25,6 +26,10 @@ const Index = () => {
     return <AdminDashboard onBack={() => setSelectedDashboard(null)} />;
   }
 
+  if (selectedDashboard === 'company') {
+    return <CompanyDashboard onBack={() => setSelectedDashboard(null)} />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Hero Section */}
@@ -41,7 +46,7 @@ const Index = () => {
             </h1>
           </div>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Revolutionary cleaning service platform connecting students with trusted professional cleaners. 
+            Revolutionary cleaning service platform connecting students with trusted professional cleaners and cleaning companies. 
             Experience seamless booking, real-time tracking, and premium quality service.
           </p>
           
@@ -49,6 +54,9 @@ const Index = () => {
             <div className="mb-8 p-4 bg-white rounded-lg shadow-md max-w-md mx-auto">
               <p className="text-sm text-gray-600">Welcome back, {user.name}!</p>
               <p className="text-sm text-blue-600">Role: {user.role}</p>
+              {user.companyName && (
+                <p className="text-sm text-green-600">Company: {user.companyName}</p>
+              )}
               <Button 
                 className="mt-2"
                 onClick={() => setSelectedDashboard(user.role)}
@@ -64,9 +72,9 @@ const Index = () => {
           <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
             <CardHeader>
               <Shield className="h-12 w-12 text-blue-600 mb-4" />
-              <CardTitle>Verified Cleaners</CardTitle>
+              <CardTitle>Verified Cleaners & Companies</CardTitle>
               <CardDescription>
-                All our cleaning professionals are thoroughly vetted and background-checked
+                All our cleaning professionals and companies are thoroughly vetted and background-checked
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -113,7 +121,7 @@ const Index = () => {
         {/* Dashboard Selection */}
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Choose Your Dashboard</h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <Card 
               className="cursor-pointer hover:shadow-lg transition-shadow bg-white border-2 hover:border-blue-500"
               onClick={() => setSelectedDashboard('student')}
@@ -143,6 +151,22 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <Button className="w-full bg-green-600 hover:bg-green-700">Access Cleaner Dashboard</Button>
+              </CardContent>
+            </Card>
+
+            <Card 
+              className="cursor-pointer hover:shadow-lg transition-shadow bg-white border-2 hover:border-orange-500"
+              onClick={() => setSelectedDashboard('company')}
+            >
+              <CardHeader>
+                <Building className="h-16 w-16 text-orange-600 mx-auto mb-4" />
+                <CardTitle>Company Portal</CardTitle>
+                <CardDescription>
+                  Manage cleaners, post services, track business performance
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full bg-orange-600 hover:bg-orange-700">Access Company Dashboard</Button>
               </CardContent>
             </Card>
 
