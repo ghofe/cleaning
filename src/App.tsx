@@ -11,7 +11,7 @@ import LoginForm from "./components/auth/LoginForm";
 
 const queryClient = new QueryClient();
 
-const AppContent = () => {
+const AppRoutes = () => {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
@@ -43,7 +43,7 @@ const App = () => (
       <AuthProvider>
         <Toaster />
         <Sonner />
-        <AppContent />
+        <AppRoutes />
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
