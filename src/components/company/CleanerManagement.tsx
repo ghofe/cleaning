@@ -7,10 +7,31 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Search, Plus, UserCheck, UserX, Mail, Phone, MapPin } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Search, Plus, UserCheck, UserX, Mail, Phone, MapPin, Star, Calendar, DollarSign } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+interface Cleaner {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  status: "active" | "pending" | "suspended";
+  joinDate: string;
+  rating: number;
+  completedJobs: number;
+  location: string;
+  avatar: string;
+  specialties: string[];
+  hourlyRate: number;
+  experience: string;
+  languages: string[];
+}
 
 const CleanerManagement = () => {
-  const [cleaners] = useState([
+  const { toast } = useToast();
+  const [cleaners, setCleaners] = useState<Cleaner[]>([
     {
       id: 1,
       name: "Sarah Mwangi",
@@ -22,7 +43,10 @@ const CleanerManagement = () => {
       completedJobs: 156,
       location: "Nairobi, Kenya",
       avatar: "/placeholder.svg",
-      specialties: ["Deep Cleaning", "Office Cleaning"]
+      specialties: ["Deep Cleaning", "Office Cleaning"],
+      hourlyRate: 500,
+      experience: "3 years",
+      languages: ["English", "Swahili"]
     },
     {
       id: 2,
@@ -35,7 +59,10 @@ const CleanerManagement = () => {
       completedJobs: 203,
       location: "Eldoret, Kenya",
       avatar: "/placeholder.svg",
-      specialties: ["Carpet Cleaning", "Window Cleaning"]
+      specialties: ["Carpet Cleaning", "Window Cleaning"],
+      hourlyRate: 600,
+      experience: "5 years",
+      languages: ["English", "Swahili", "Kalenjin"]
     },
     {
       id: 3,
@@ -48,22 +75,90 @@ const CleanerManagement = () => {
       completedJobs: 0,
       location: "Mombasa, Kenya",
       avatar: "/placeholder.svg",
-      specialties: ["Residential Cleaning"]
+      specialties: ["Residential Cleaning"],
+      hourlyRate: 450,
+      experience: "1 year",
+      languages: ["English", "Swahili"]
     }
   ]);
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [editingCleaner, setEditingCleaner] = useState<Cleaner | null>(null);
   const [newCleaner, setNewCleaner] = useState({
     name: "",
     email: "",
     phone: "",
-    location: ""
+    location: "",
+    specialties: [] as string[],
+    hourlyRate: "",
+    experience: "",
+    languages: [] as string[]
   });
 
-  const filteredCleaners = cleaners.filter(cleaner =>
-    cleaner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    cleaner.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredCleaners = cleaners.filter(cleaner => {
+    const matchesSearch = cleaner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         cleaner.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = filterStatus === "all" || cleaner.status === filterStatus;
+    return matchesSearch && matchesStatus;
+  });
+
+  const handleStatusChange = (cleanerId: number, newStatus: "active" | "suspended") => {
+    setCleaners(prev => prev.map(cleaner => 
+      cleaner.id === cleanerId ? { ...cleaner, status: newStatus } : cleaner
+    ));
+    toast({
+      title: "Status Updated",
+      description: `Cleaner status changed to ${newStatus}`,
+    });
+  };
+
+  const handleApproveCleaner = (cleanerId: number) => {
+    setCleaners(prev => prev.map(cleaner => 
+      cleaner.id === cleanerId ? { ...cleaner, status: "active" } : cleaner
+    ));
+    toast({
+      title: "Cleaner Approved",
+      description: "Cleaner has been approved and is now active",
+    });
+  };
+
+  const handleAddCleaner = () => {
+    const cleaner: Cleaner = {
+      id: Date.now(),
+      name: newCleaner.name,
+      email: newCleaner.email,
+      phone: newCleaner.phone,
+      location: newCleaner.location,
+      status: "pending",
+      joinDate: new Date().toISOString().split('T')[0],
+      rating: 0,
+      completedJobs: 0,
+      avatar: "/placeholder.svg",
+      specialties: newCleaner.specialties,
+      hourlyRate: parseInt(newCleaner.hourlyRate),
+      experience: newCleaner.experience,
+      languages: newCleaner.languages
+    };
+    
+    setCleaners(prev => [...prev, cleaner]);
+    setNewCleaner({
+      name: "",
+      email: "",
+      phone: "",
+      location: "",
+      specialties: [],
+      hourlyRate: "",
+      experience: "",
+      languages: []
+    });
+    setIsAddDialogOpen(false);
+    toast({
+      title: "Cleaner Added",
+      description: "New cleaner invitation sent successfully",
+    });
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -82,21 +177,21 @@ const CleanerManagement = () => {
           <p className="text-gray-600">Manage your team of cleaners</p>
         </div>
         
-        <Dialog>
+        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
             <Button>
               <Plus className="h-4 w-4 mr-2" />
               Add New Cleaner
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Add New Cleaner</DialogTitle>
               <DialogDescription>
                 Register a new cleaner to your company team
               </DialogDescription>
             </DialogHeader>
-            <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="name">Full Name</Label>
                 <Input
@@ -130,8 +225,50 @@ const CleanerManagement = () => {
                   onChange={(e) => setNewCleaner(prev => ({ ...prev, location: e.target.value }))}
                 />
               </div>
-              <Button className="w-full">Send Invitation</Button>
+              <div>
+                <Label htmlFor="hourlyRate">Hourly Rate (KES)</Label>
+                <Input
+                  id="hourlyRate"
+                  type="number"
+                  value={newCleaner.hourlyRate}
+                  onChange={(e) => setNewCleaner(prev => ({ ...prev, hourlyRate: e.target.value }))}
+                />
+              </div>
+              <div>
+                <Label htmlFor="experience">Experience</Label>
+                <Input
+                  id="experience"
+                  value={newCleaner.experience}
+                  onChange={(e) => setNewCleaner(prev => ({ ...prev, experience: e.target.value }))}
+                  placeholder="e.g., 3 years"
+                />
+              </div>
+              <div className="col-span-2">
+                <Label htmlFor="specialties">Specialties (comma-separated)</Label>
+                <Input
+                  id="specialties"
+                  value={newCleaner.specialties.join(', ')}
+                  onChange={(e) => setNewCleaner(prev => ({ 
+                    ...prev, 
+                    specialties: e.target.value.split(',').map(s => s.trim()).filter(s => s) 
+                  }))}
+                  placeholder="Deep Cleaning, Office Cleaning"
+                />
+              </div>
+              <div className="col-span-2">
+                <Label htmlFor="languages">Languages (comma-separated)</Label>
+                <Input
+                  id="languages"
+                  value={newCleaner.languages.join(', ')}
+                  onChange={(e) => setNewCleaner(prev => ({ 
+                    ...prev, 
+                    languages: e.target.value.split(',').map(s => s.trim()).filter(s => s) 
+                  }))}
+                  placeholder="English, Swahili"
+                />
+              </div>
             </div>
+            <Button onClick={handleAddCleaner} className="w-full">Send Invitation</Button>
           </DialogContent>
         </Dialog>
       </div>
@@ -158,7 +295,10 @@ const CleanerManagement = () => {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-2xl font-bold text-blue-600">
-                {(cleaners.reduce((sum, c) => sum + c.rating, 0) / cleaners.filter(c => c.rating > 0).length).toFixed(1)}
+                {cleaners.filter(c => c.rating > 0).length > 0 ? 
+                  (cleaners.reduce((sum, c) => sum + c.rating, 0) / cleaners.filter(c => c.rating > 0).length).toFixed(1) : 
+                  "0"
+                }
               </p>
               <p className="text-sm text-gray-500">Average Rating</p>
             </div>
@@ -176,17 +316,30 @@ const CleanerManagement = () => {
         </Card>
       </div>
 
-      {/* Search */}
+      {/* Search and Filter */}
       <Card>
         <CardContent className="p-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-            <Input
-              placeholder="Search cleaners..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
+          <div className="flex gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Input
+                placeholder="Search cleaners..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            <Select value={filterStatus} onValueChange={setFilterStatus}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Filter by status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="suspended">Suspended</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </CardContent>
       </Card>
@@ -229,6 +382,14 @@ const CleanerManagement = () => {
                         </Badge>
                       ))}
                     </div>
+                    <div className="flex items-center space-x-4 text-xs text-gray-500 mt-1">
+                      <div className="flex items-center space-x-1">
+                        <DollarSign className="h-3 w-3" />
+                        <span>KES {cleaner.hourlyRate}/hr</span>
+                      </div>
+                      <span>• {cleaner.experience} experience</span>
+                      <span>• {cleaner.languages.join(', ')}</span>
+                    </div>
                   </div>
                 </div>
 
@@ -249,17 +410,29 @@ const CleanerManagement = () => {
                       View Profile
                     </Button>
                     {cleaner.status === "active" ? (
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleStatusChange(cleaner.id, "suspended")}
+                      >
                         <UserX className="h-4 w-4 mr-1" />
                         Suspend
                       </Button>
                     ) : cleaner.status === "pending" ? (
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleApproveCleaner(cleaner.id)}
+                      >
                         <UserCheck className="h-4 w-4 mr-1" />
                         Approve
                       </Button>
                     ) : (
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleStatusChange(cleaner.id, "active")}
+                      >
                         <UserCheck className="h-4 w-4 mr-1" />
                         Reactivate
                       </Button>
