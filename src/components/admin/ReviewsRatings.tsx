@@ -10,64 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Star, Search, Flag, Eye, Trash2 } from "lucide-react";
 
 const ReviewsRatings = () => {
-  const [reviews] = useState([
-    {
-      id: 1,
-      student: "Prince Ahmed",
-      cleaner: "Jane Wanjiku",
-      rating: 5,
-      comment: "Excellent service! Jane was very thorough and professional. My room has never been cleaner.",
-      date: "2024-06-01",
-      bookingId: "BK001",
-      service: "Room Cleaning",
-      status: "published",
-      flagged: false,
-      studentAvatar: "/placeholder.svg",
-      cleanerAvatar: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      student: "Sarah Mwangi",
-      cleaner: "Peter Kimani",
-      rating: 4,
-      comment: "Good work overall. Peter arrived on time and did a decent job. Could improve on bathroom corners.",
-      date: "2024-05-30",
-      bookingId: "BK002",
-      service: "Bathroom Deep Clean",
-      status: "published",
-      flagged: false,
-      studentAvatar: "/placeholder.svg",
-      cleanerAvatar: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      student: "John Ochieng",
-      cleaner: "Mary Achieng",
-      rating: 1,
-      comment: "Very disappointed. The cleaner was late and did not clean properly. Found dirt in several places.",
-      date: "2024-05-28",
-      bookingId: "BK003",
-      service: "Kitchen Cleaning",
-      status: "flagged",
-      flagged: true,
-      studentAvatar: "/placeholder.svg",
-      cleanerAvatar: "/placeholder.svg"
-    },
-    {
-      id: 4,
-      student: "Emma Nduta",
-      cleaner: "Jane Wanjiku",
-      rating: 5,
-      comment: "Amazing work! Jane is very detail-oriented and professional. Highly recommend her services.",
-      date: "2024-05-25",
-      bookingId: "BK004",
-      service: "Full Room Service",
-      status: "published",
-      flagged: false,
-      studentAvatar: "/placeholder.svg",
-      cleanerAvatar: "/placeholder.svg"
-    }
-  ]);
+  const [reviews] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterRating, setFilterRating] = useState("all");

@@ -9,69 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlertTriangle, Clock, CheckCircle, MessageSquare, FileText } from "lucide-react";
 
 const DisputeResolution = () => {
-  const [disputes] = useState([
-    {
-      id: "DSP-001",
-      type: "Service Quality",
-      status: "open",
-      priority: "high",
-      student: {
-        name: "Sarah Mwangi",
-        avatar: "/placeholder.svg"
-      },
-      cleaner: {
-        name: "Jane Wanjiku",
-        avatar: "/placeholder.svg"
-      },
-      booking: {
-        id: "BK-12345",
-        service: "Room Cleaning",
-        date: "2024-06-01",
-        amount: "KES 800"
-      },
-      description: "The cleaner did not clean the bathroom as requested and left early without completing the full service.",
-      createdAt: "2024-06-02 10:30 AM",
-      lastUpdate: "2024-06-02 2:15 PM",
-      messages: [
-        {
-          id: 1,
-          sender: "student",
-          message: "The service was incomplete and the cleaner left early.",
-          timestamp: "10:30 AM"
-        },
-        {
-          id: 2,
-          sender: "cleaner",
-          message: "I completed all requested tasks within the agreed timeframe.",
-          timestamp: "11:45 AM"
-        }
-      ]
-    },
-    {
-      id: "DSP-002",
-      type: "Payment Issue",
-      status: "investigating",
-      priority: "medium",
-      student: {
-        name: "John Ochieng",
-        avatar: "/placeholder.svg"
-      },
-      cleaner: {
-        name: "Peter Kimani",
-        avatar: "/placeholder.svg"
-      },
-      booking: {
-        id: "BK-12346",
-        service: "Full Service",
-        date: "2024-05-30",
-        amount: "KES 1,500"
-      },
-      description: "Payment was deducted but service was not provided due to cleaner no-show.",
-      createdAt: "2024-05-31 9:15 AM",
-      lastUpdate: "2024-06-01 4:20 PM",
-      messages: []
-    }
-  ]);
+  const [disputes] = useState([]);
 
   const getStatusColor = (status: string) => {
     switch (status) {

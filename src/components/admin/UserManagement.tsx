@@ -10,45 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, Filter, Ban, UserCheck, Mail, Phone } from "lucide-react";
 
 const UserManagement = () => {
-  const [users] = useState([
-    {
-      id: 1,
-      name: "Prince Ahmed",
-      email: "prince.ahmed@student.edu",
-      phone: "+254 701 234 567",
-      type: "student",
-      status: "active",
-      joinDate: "2024-01-15",
-      totalBookings: 12,
-      totalSpent: 9600,
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      name: "Jane Wanjiku",
-      email: "jane.wanjiku@gmail.com",
-      phone: "+254 702 345 678",
-      type: "cleaner",
-      status: "active",
-      joinDate: "2023-08-20",
-      totalBookings: 127,
-      totalEarned: 45000,
-      rating: 4.8,
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      name: "Sarah Mwangi",
-      email: "sarah.mwangi@student.edu",
-      phone: "+254 703 456 789",
-      type: "student",
-      status: "suspended",
-      joinDate: "2024-02-10",
-      totalBookings: 3,
-      totalSpent: 2400,
-      avatar: "/placeholder.svg"
-    }
-  ]);
+  const [users] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");

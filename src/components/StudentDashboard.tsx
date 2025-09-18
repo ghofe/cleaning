@@ -21,43 +21,8 @@ interface StudentDashboardProps {
 const StudentDashboard = ({ onBack }: StudentDashboardProps) => {
   const [activeTab, setActiveTab] = useState('dashboard');
 
-  const upcomingBookings = [
-    {
-      id: 1,
-      date: "Today, 2:00 PM",
-      cleaner: "Jane Wanjiku",
-      rating: 4.8,
-      service: "Room Cleaning",
-      status: "confirmed",
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      date: "Tomorrow, 10:00 AM",
-      cleaner: "Peter Kimani",
-      rating: 4.9,
-      service: "Bathroom Deep Clean",
-      status: "pending",
-      avatar: "/placeholder.svg"
-    }
-  ];
-
-  const favoriteCleaners = [
-    {
-      id: 1,
-      name: "Jane Wanjiku",
-      rating: 4.8,
-      specialties: ["Kitchen", "Bathroom", "General"],
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      name: "Mary Achieng",
-      rating: 4.9,
-      specialties: ["Deep Clean", "Laundry"],
-      avatar: "/placeholder.svg"
-    }
-  ];
+  const upcomingBookings: any[] = [];
+  const favoriteCleaners: any[] = [];
 
   const sidebarItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BookOpen },

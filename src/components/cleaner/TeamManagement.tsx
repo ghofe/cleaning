@@ -10,44 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Users, Plus, Phone, Mail, Star, Calendar } from "lucide-react";
 
 const TeamManagement = () => {
-  const [teamMembers] = useState([
-    {
-      id: 1,
-      name: "Mary Achieng",
-      email: "mary.achieng@gmail.com",
-      phone: "+254 701 234 567",
-      role: "Assistant Cleaner",
-      status: "active",
-      rating: 4.7,
-      joinDate: "2024-01-15",
-      completedJobs: 45,
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      name: "Peter Kimani",
-      email: "peter.kimani@gmail.com", 
-      phone: "+254 702 345 678",
-      role: "Assistant Cleaner",
-      status: "active",
-      rating: 4.5,
-      joinDate: "2024-03-20",
-      completedJobs: 28,
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      name: "Grace Njeri",
-      email: "grace.njeri@gmail.com",
-      phone: "+254 703 456 789", 
-      role: "Trainee",
-      status: "training",
-      rating: 4.2,
-      joinDate: "2024-05-10",
-      completedJobs: 8,
-      avatar: "/placeholder.svg"
-    }
-  ]);
+  const [teamMembers] = useState([]);
 
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteName, setInviteName] = useState("");

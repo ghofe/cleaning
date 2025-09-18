@@ -21,27 +21,7 @@ interface SmsMessage {
 }
 
 const SmsNotificationSystem = () => {
-  const [smsMessages, setSmsMessages] = useState<SmsMessage[]>([
-    {
-      id: '1',
-      cleanerId: 'CLN1234',
-      cleanerName: 'Jane Wanjiku',
-      message: 'New Job Request CLN1234 → Student: Room 234 in Hostels @ USIU. Date: 05/16/2024, Time: 10:00AM. Reply: ACCEPT 1234 or DECLINE 1234',
-      type: 'job_request',
-      status: 'delivered',
-      sentAt: '2024-05-16 09:30',
-      response: 'ACCEPT 1234'
-    },
-    {
-      id: '2',
-      cleanerId: 'CLN5678',
-      cleanerName: 'Peter Kimani',
-      message: 'Reminder: Job at Room 145, Hostel B today at 2:00 PM. Ticket #5678',
-      type: 'reminder',
-      status: 'sent',
-      sentAt: '2024-05-16 13:00'
-    }
-  ]);
+  const [smsMessages, setSmsMessages] = useState<SmsMessage[]>([]);
 
   const [newMessage, setNewMessage] = useState({
     cleanerId: '',

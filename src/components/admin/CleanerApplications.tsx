@@ -9,68 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { CheckCircle, XCircle, Clock, Star, MapPin, Phone, Mail, FileText } from "lucide-react";
 
 const CleanerApplications = () => {
-  const [applications] = useState([
-    {
-      id: 1,
-      name: "David Mutua",
-      email: "david.mutua@gmail.com",
-      phone: "+254 701 234 567",
-      location: "Nairobi, Kenya",
-      experience: "2 years",
-      previousRating: 4.6,
-      appliedDate: "2024-06-01",
-      status: "pending",
-      documents: ["ID Copy", "Certificate", "References"],
-      services: ["Room Cleaning", "Bathroom Cleaning"],
-      bio: "Experienced cleaner with focus on attention to detail and customer satisfaction.",
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      name: "Grace Njeri",
-      email: "grace.njeri@gmail.com",
-      phone: "+254 702 345 678",
-      location: "Kiambu, Kenya",
-      experience: "3 years",
-      previousRating: 4.8,
-      appliedDate: "2024-05-28",
-      status: "pending",
-      documents: ["ID Copy", "Certificate", "References", "Medical Certificate"],
-      services: ["Kitchen Cleaning", "Deep Cleaning", "Laundry"],
-      bio: "Professional cleaner specializing in kitchen and deep cleaning services.",
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      name: "Samuel Ochieng",
-      email: "samuel.ochieng@gmail.com",
-      phone: "+254 703 456 789",
-      location: "Nakuru, Kenya",
-      experience: "1 year",
-      previousRating: 4.3,
-      appliedDate: "2024-05-25",
-      status: "approved",
-      documents: ["ID Copy", "Certificate"],
-      services: ["Room Cleaning", "Window Cleaning"],
-      bio: "New to professional cleaning but eager to provide quality service.",
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 4,
-      name: "Alice Wanjira",
-      email: "alice.wanjira@gmail.com",
-      phone: "+254 704 567 890",
-      location: "Mombasa, Kenya",
-      experience: "6 months",
-      previousRating: 3.9,
-      appliedDate: "2024-05-20",
-      status: "rejected",
-      documents: ["ID Copy"],
-      services: ["Room Cleaning"],
-      bio: "Looking to start career in professional cleaning services.",
-      avatar: "/placeholder.svg"
-    }
-  ]);
+  const [applications] = useState([]);
 
   const getStatusColor = (status: string) => {
     switch (status) {

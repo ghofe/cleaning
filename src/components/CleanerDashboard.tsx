@@ -19,37 +19,8 @@ interface CleanerDashboardProps {
 const CleanerDashboard = ({ onBack }: CleanerDashboardProps) => {
   const [activeTab, setActiveTab] = useState('dashboard');
 
-  const todaysJobs = [
-    {
-      id: 1,
-      time: "10:00 AM",
-      student: "Sarah Mwangi",
-      location: "Hostel A, Room 12",
-      service: "Room Cleaning",
-      status: "confirmed",
-      payment: "KES 800"
-    },
-    {
-      id: 2,
-      time: "2:00 PM",
-      student: "John Ochieng",
-      location: "Hostel B, Room 25",
-      service: "Bathroom Deep Clean",
-      status: "pending",
-      payment: "KES 1,200"
-    }
-  ];
-
-  const pendingRequests = [
-    {
-      id: 1,
-      student: "Emma Nduta",
-      time: "Tomorrow, 9:00 AM",
-      service: "Full Room Service",
-      payment: "KES 1,500",
-      timeLeft: "2 hours to respond"
-    }
-  ];
+  const todaysJobs: any[] = [];
+  const pendingRequests: any[] = [];
 
   const sidebarItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Calendar },

@@ -16,68 +16,7 @@ const CleanerSelection = ({ selectedCleaner, onCleanerChange }: CleanerSelection
   const [sortBy, setSortBy] = useState("rating");
   const [filterLocation, setFilterLocation] = useState("all");
 
-  const cleaners = [
-    {
-      id: "1",
-      name: "Jane Wanjiku",
-      rating: 4.9,
-      reviews: 127,
-      location: "Block A",
-      distance: "0.2 km",
-      price: 800,
-      specialties: ["Room Cleaning", "Bathroom", "Kitchen"],
-      availability: "Available now",
-      completedJobs: 156,
-      avatar: "/placeholder.svg",
-      verified: true,
-      responseTime: "< 5 min"
-    },
-    {
-      id: "2",
-      name: "Peter Kimani",
-      rating: 4.8,
-      reviews: 89,
-      location: "Block B",
-      distance: "0.4 km",
-      price: 750,
-      specialties: ["Deep Cleaning", "Laundry", "General"],
-      availability: "Available in 30 min",
-      completedJobs: 98,
-      avatar: "/placeholder.svg",
-      verified: true,
-      responseTime: "< 10 min"
-    },
-    {
-      id: "3",
-      name: "Mary Achieng",
-      rating: 4.7,
-      reviews: 203,
-      location: "Block A",
-      distance: "0.1 km",
-      price: 850,
-      specialties: ["Kitchen", "Bathroom", "Windows"],
-      availability: "Available now",
-      completedJobs: 245,
-      avatar: "/placeholder.svg",
-      verified: true,
-      responseTime: "< 3 min"
-    },
-    {
-      id: "4",
-      name: "David Mutua",
-      rating: 4.6,
-      reviews: 67,
-      location: "Block C",
-      distance: "0.6 km",
-      price: 700,
-      specialties: ["Room Cleaning", "General"],
-      availability: "Available in 1 hour",
-      completedJobs: 78,
-      avatar: "/placeholder.svg",
-      verified: false,
-      responseTime: "< 15 min"
-    }
-  ];
+  const cleaners: any[] = [];
 
   const sortedCleaners = [...cleaners].sort((a, b) => {
     switch (sortBy) {

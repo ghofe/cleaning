@@ -8,47 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Clock, MapPin, Star, Phone, MessageSquare } from "lucide-react";
 
 const MyBookings = () => {
-  const [bookings] = useState([
-    {
-      id: 1,
-      service: "Room Cleaning",
-      cleaner: "Jane Wanjiku",
-      date: "2024-06-02",
-      time: "2:00 PM - 4:00 PM",
-      location: "Room 245, Block A",
-      status: "confirmed",
-      price: "KES 800",
-      cleanerRating: 4.8,
-      cleanerPhone: "+254 701 234 567",
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      service: "Bathroom Deep Clean",
-      cleaner: "Peter Kimani",
-      date: "2024-06-03",
-      time: "10:00 AM - 12:00 PM",
-      location: "Room 245, Block A",
-      status: "pending",
-      price: "KES 1,200",
-      cleanerRating: 4.9,
-      cleanerPhone: "+254 702 345 678",
-      avatar: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      service: "Kitchen Cleaning",
-      cleaner: "Mary Achieng",
-      date: "2024-05-28",
-      time: "12:00 PM - 2:00 PM",
-      location: "Room 245, Block A",
-      status: "completed",
-      price: "KES 1,000",
-      cleanerRating: 4.9,
-      cleanerPhone: "+254 703 456 789",
-      avatar: "/placeholder.svg"
-    }
-  ]);
+  const [bookings] = useState([]);
 
   const getStatusColor = (status: string) => {
     switch (status) {

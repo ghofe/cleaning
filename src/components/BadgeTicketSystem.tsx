@@ -22,30 +22,7 @@ interface TicketVerification {
 }
 
 const BadgeTicketSystem = () => {
-  const [tickets, setTickets] = useState<TicketVerification[]>([
-    {
-      id: '1',
-      ticketCode: 'TKT1234',
-      cleanerId: 'CLN1234',
-      cleanerName: 'Jane Wanjiku',
-      studentName: 'Alice Wanjiru',
-      location: 'Hostel A, Room 234',
-      scheduledTime: '2024-05-16 10:00',
-      status: 'pending'
-    },
-    {
-      id: '2',
-      ticketCode: 'TKT5678',
-      cleanerId: 'CLN5678',
-      cleanerName: 'Peter Kimani',
-      studentName: 'Brian Otieno',
-      location: 'Hostel B, Room 145',
-      scheduledTime: '2024-05-16 14:00',
-      status: 'checked_in',
-      checkedInAt: '2024-05-16 13:55',
-      gateStaff: 'Security Guard - James'
-    }
-  ]);
+  const [tickets, setTickets] = useState<TicketVerification[]>([]);
 
   const [verificationCode, setVerificationCode] = useState('');
   const { toast } = useToast();

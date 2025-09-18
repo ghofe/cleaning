@@ -10,59 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, Calendar, Clock, MapPin, DollarSign, Eye } from "lucide-react";
 
 const BookingsManagement = () => {
-  const [bookings] = useState([
-    {
-      id: 1,
-      bookingId: "BK001",
-      student: "Prince Ahmed",
-      cleaner: "Jane Wanjiku",
-      service: "Room Cleaning",
-      date: "2024-06-02",
-      time: "2:00 PM - 4:00 PM",
-      location: "Room 245, Block A",
-      amount: 800,
-      commission: 120,
-      status: "completed",
-      paymentStatus: "paid",
-      escrowStatus: "released",
-      studentAvatar: "/placeholder.svg",
-      cleanerAvatar: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      bookingId: "BK002",
-      student: "Sarah Mwangi",
-      cleaner: "Peter Kimani",
-      service: "Bathroom Deep Clean",
-      date: "2024-06-03",
-      time: "10:00 AM - 12:00 PM",
-      location: "Room 12, Block A",
-      amount: 1200,
-      commission: 180,
-      status: "in_progress",
-      paymentStatus: "paid",
-      escrowStatus: "held",
-      studentAvatar: "/placeholder.svg",
-      cleanerAvatar: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      bookingId: "BK003",
-      student: "John Ochieng",
-      cleaner: "Mary Achieng",
-      service: "Kitchen Cleaning",
-      date: "2024-06-04",
-      time: "12:00 PM - 2:00 PM",
-      location: "Room 25, Block B",
-      amount: 1000,
-      commission: 150,
-      status: "confirmed",
-      paymentStatus: "paid",
-      escrowStatus: "held",
-      studentAvatar: "/placeholder.svg",
-      cleanerAvatar: "/placeholder.svg"
-    }
-  ]);
+  const [bookings] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");

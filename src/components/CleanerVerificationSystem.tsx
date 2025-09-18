@@ -23,26 +23,7 @@ interface PendingCleaner {
 }
 
 const CleanerVerificationSystem = () => {
-  const [pendingCleaners, setPendingCleaners] = useState<PendingCleaner[]>([
-    {
-      id: '1',
-      name: 'David Mutua',
-      phoneNumber: '+254712345678',
-      idNumber: '12345678',
-      submittedAt: '2024-05-16 10:30',
-      submittedBy: 'Computer Café - USIU Gate',
-      status: 'pending'
-    },
-    {
-      id: '2',
-      name: 'Grace Njeri',
-      phoneNumber: '+254723456789',
-      idNumber: '23456789',
-      submittedAt: '2024-05-16 14:15',
-      submittedBy: 'Computer Café - Town Center',
-      status: 'pending'
-    }
-  ]);
+  const [pendingCleaners, setPendingCleaners] = useState<PendingCleaner[]>([]);
 
   const [newCleaner, setNewCleaner] = useState({
     name: '',

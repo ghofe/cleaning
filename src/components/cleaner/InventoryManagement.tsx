@@ -8,52 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { Package, AlertTriangle, Plus, Minus, ShoppingCart } from "lucide-react";
 
 const InventoryManagement = () => {
-  const [supplies, setSupplies] = useState([
-    {
-      id: 1,
-      name: "All-Purpose Cleaner",
-      category: "Cleaning Solutions",
-      current: 3,
-      minimum: 2,
-      maximum: 10,
-      unit: "bottles",
-      cost: 250,
-      lastRestocked: "2024-05-28"
-    },
-    {
-      id: 2,
-      name: "Microfiber Cloths",
-      category: "Cleaning Tools",
-      current: 8,
-      minimum: 5,
-      maximum: 20,
-      unit: "pieces",
-      cost: 50,
-      lastRestocked: "2024-05-25"
-    },
-    {
-      id: 3,
-      name: "Toilet Paper",
-      category: "Supplies",
-      current: 12,
-      minimum: 10,
-      maximum: 50,
-      unit: "rolls",
-      cost: 30,
-      lastRestocked: "2024-06-01"
-    },
-    {
-      id: 4,
-      name: "Vacuum Cleaner Bags",
-      category: "Equipment",
-      current: 1,
-      minimum: 3,
-      maximum: 15,
-      unit: "pieces",
-      cost: 100,
-      lastRestocked: "2024-05-20"
-    }
-  ]);
+  const [supplies, setSupplies] = useState([]);
 
   const updateQuantity = (id: number, change: number) => {
     setSupplies(prev => prev.map(item => 
