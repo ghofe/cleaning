@@ -4,14 +4,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Star, User, BookOpen, MessageSquare, Settings, ArrowLeft, Plus, Route, Gift, Repeat } from "lucide-react";
 import { useState } from "react";
-import BookCleaner from "./student/BookCleaner";
-import MyBookings from "./student/MyBookings";
-import Reviews from "./student/Reviews";
-import Profile from "./student/Profile";
-import Support from "./student/Support";
-import LiveTracking from "./student/LiveTracking";
-import RecurringBookings from "./student/RecurringBookings";
-import LoyaltyRewards from "./student/LoyaltyRewards";
+import BookCleaner from "./homeowner/BookCleaner";
+import MyBookings from "./homeowner/MyBookings";
+import Reviews from "./homeowner/Reviews";
+import Profile from "./homeowner/Profile";
+import Support from "./homeowner/Support";
+import LiveTracking from "./homeowner/LiveTracking";
+import RecurringBookings from "./homeowner/RecurringBookings";
+import LoyaltyRewards from "./homeowner/LoyaltyRewards";
 import ChatSystem from "./messaging/ChatSystem";
 
 interface StudentDashboardProps {

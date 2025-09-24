@@ -24,10 +24,10 @@ import NotificationSystem from './features/NotificationSystem';
 import DarkModeToggle from './features/DarkModeToggle';
 
 // Import existing components
-import LoyaltyRewards from './student/LoyaltyRewards';
+import LoyaltyRewards from './homeowner/LoyaltyRewards';
 import InventoryManagement from './cleaner/InventoryManagement';
 import ChatSystem from './messaging/ChatSystem';
-import LiveTracking from './student/LiveTracking';
+import LiveTracking from './homeowner/LiveTracking';
 
 const EnhancedDashboard = () => {
   const { user, logout } = useAuth();
