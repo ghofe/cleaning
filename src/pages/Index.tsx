@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Shield, MapPin, Calendar, Star } from "lucide-react";
 import { useState } from "react";
-import StudentDashboard from "@/components/HomeownerDashboard";
+import HomeOwnerDashboard from "@/components/HomeownerDashboard";
 import CleanerDashboard from "@/components/CleanerDashboard";
 import AdminDashboard from "@/components/AdminDashboard";
 import CompanyDashboard from "@/components/CompanyDashboard";
@@ -33,7 +33,7 @@ const Index = () => {
 
   // Show selected dashboard based on user selection
   if (currentView === 'homeowner') {
-    return <StudentDashboard onBack={() => setCurrentView("landing")} />;
+    return <HomeOwnerDashboard onBack={() => setCurrentView("landing")} />;
   }
 
   if (currentView === 'cleaner') {
@@ -55,7 +55,7 @@ const Index = () => {
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img 
-              src="/lovable-uploads/8c321e35-db19-4660-acb4-90f2e30e158b.png" 
+              src="/png/8c321e35-db19-4660-acb4-90f2e30e158b.png" 
               alt="CampusClean Logo" 
               className="h-10 w-10 object-contain"
             />
