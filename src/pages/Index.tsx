@@ -1,171 +1,157 @@
-
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Calendar, Star, Clock, MapPin, Shield, Building } from "lucide-react";
+import { Shield, MapPin, Calendar, Star } from "lucide-react";
 import { useState } from "react";
-import HomeOwnerDashboard from "@/components/HomeOwnerDashboard";import CleanerDashboard from "@/components/CleanerDashboard";
+import StudentDashboard from "@/components/HomeownerDashboard";
+import CleanerDashboard from "@/components/CleanerDashboard";
 import AdminDashboard from "@/components/AdminDashboard";
 import CompanyDashboard from "@/components/CompanyDashboard";
+import LoginForm from "@/components/auth/LoginForm";
+import SignupForm from "@/components/auth/SignupForm";
+import heroImage from "@/assets/hero-cleaning-illustration.png";
 
 const Index = () => {
-  const [selectedDashboard, setSelectedDashboard] = useState<string | null>(null);
+  const [currentView, setCurrentView] = useState<"landing" | "login" | "signup" | string>("landing");
 
-  // Show selected dashboard based on user selection, not user role
-  if (selectedDashboard === 'homeowner') {
-    return <HomeOwnerDashboard onBack={() => setSelectedDashboard(null)} />;
+  // Handle different views
+  if (currentView === "login") {
+    return (
+      <LoginForm
+        onBack={() => setCurrentView("landing")}
+        onLogin={(userType) => setCurrentView(userType)}
+      />
+    );
   }
 
-  if (selectedDashboard === 'cleaner') {
-    return <CleanerDashboard onBack={() => setSelectedDashboard(null)} />;
+  if (currentView === "signup") {
+    return (
+      <SignupForm
+        onBack={() => setCurrentView("landing")}
+        onSignup={(userType) => setCurrentView(userType)}
+      />
+    );
   }
 
-  if (selectedDashboard === 'admin') {
-    return <AdminDashboard onBack={() => setSelectedDashboard(null)} />;
+  // Show selected dashboard based on user selection
+  if (currentView === 'homeowner') {
+    return <StudentDashboard onBack={() => setCurrentView("landing")} />;
   }
 
-  if (selectedDashboard === 'company') {
-    return <CompanyDashboard onBack={() => setSelectedDashboard(null)} />;
+  if (currentView === 'cleaner') {
+    return <CleanerDashboard onBack={() => setCurrentView("landing")} />;
+  }
+
+  if (currentView === 'admin') {
+    return <AdminDashboard onBack={() => setCurrentView("landing")} />;
+  }
+
+  if (currentView === 'company') {
+    return <CompanyDashboard onBack={() => setCurrentView("landing")} />;
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-6">
+      {/* Header */}
+      <header className="container mx-auto px-4 py-6">
+        <nav className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <img 
               src="/lovable-uploads/8c321e35-db19-4660-acb4-90f2e30e158b.png" 
               alt="CampusClean Logo" 
-              className="h-20 w-20 mr-4 object-contain"
+              className="h-10 w-10 object-contain"
             />
-            <h1 className="text-5xl font-bold text-gray-900">
-              CampusClean
-            </h1>
+            <span className="text-2xl font-bold text-gray-900">CampusClean</span>
           </div>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Revolutionary cleaning service platform connecting homeowners with trusted professional cleaners and cleaning companies. 
-            Experience seamless booking, real-time tracking, and premium quality service.
-          </p>
+          
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
+            <a href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition-colors">How it Works</a>
+            <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+            <Button variant="ghost" onClick={() => setCurrentView("login")}>
+              Login
+            </Button>
+            <Button onClick={() => setCurrentView("signup")}>
+              Sign Up
+            </Button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+              Your Trusted Cleaning Partner, Anytime.
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-lg">
+              CampusClean connects homeowners with verified cleaners and companies. Book 
+              services in minutes, track in real-time, and enjoy peace of mind.
+            </p>
+            <div className="flex gap-4">
+              <Button size="lg" onClick={() => setCurrentView("signup")}>
+                Get Started
+              </Button>
+              <Button variant="outline" size="lg" onClick={() => setCurrentView("login")}>
+                Login
+              </Button>
+            </div>
+          </div>
+          
+          <div className="flex justify-center">
+            <img 
+              src={heroImage} 
+              alt="Professional cleaning service illustration" 
+              className="max-w-full h-auto"
+            />
+          </div>
         </div>
+      </div>
 
-        {/* Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
-            <CardHeader>
-              <Shield className="h-12 w-12 text-blue-600 mb-4" />
-              <CardTitle>Verified Cleaners & Companies</CardTitle>
-              <CardDescription>
-                All our cleaning professionals and companies are thoroughly vetted and background-checked
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                <span className="text-sm text-gray-600">4.9+ average rating</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
-            <CardHeader>
-              <Clock className="h-12 w-12 text-green-600 mb-4" />
-              <CardTitle>Real-time Tracking</CardTitle>
-              <CardDescription>
-                Track your cleaner's location and service progress in real-time
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-green-600" />
-                <span className="text-sm text-gray-600">Live GPS tracking</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
-            <CardHeader>
-              <Calendar className="h-12 w-12 text-purple-600 mb-4" />
-              <CardTitle>Flexible Scheduling</CardTitle>
-              <CardDescription>
-                Book cleaning services that fit your schedule, from daily to weekly
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <Users className="h-4 w-4 text-purple-600" />
-                <span className="text-sm text-gray-600">24/7 availability</span>
-              </div>
-            </CardContent>
-          </Card>
+      {/* Features Section */}
+      <div id="features" className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Features</h2>
         </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <Shield className="h-16 w-16 text-blue-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Verified Cleaners & Companies
+            </h3>
+            <p className="text-gray-600 mb-4">
+              All cleaners are vetted and background checked
+            </p>
+            <div className="flex items-center justify-center gap-1">
+              <Star className="h-4 w-4 text-yellow-400 fill-current" />
+              <span className="text-sm font-medium">4.9+ average rating</span>
+            </div>
+          </div>
 
-        {/* Dashboard Selection */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Choose Your Dashboard</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <Card 
-              className="cursor-pointer hover:shadow-lg transition-shadow bg-white border-2 hover:border-blue-500"
-              onClick={() => setSelectedDashboard('homeowner')}
-            >
-              <CardHeader>
-                <Users className="h-16 w-16 text-blue-600 mx-auto mb-4" />
-                <CardTitle>Homeowner Portal</CardTitle>
-                <CardDescription>
-                  Book cleaning services, track orders, manage payments
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full">Access Homeowner Dashboard</Button>
-              </CardContent>
-            </Card>
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <MapPin className="h-16 w-16 text-blue-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Real-time Tracking
+            </h3>
+            <p className="text-gray-600">
+              Track cleaner's location and progress live
+            </p>
+          </div>
 
-            <Card 
-              className="cursor-pointer hover:shadow-lg transition-shadow bg-white border-2 hover:border-green-500"
-              onClick={() => setSelectedDashboard('cleaner')}
-            >
-              <CardHeader>
-                <Star className="h-16 w-16 text-green-600 mx-auto mb-4" />
-                <CardTitle>Cleaner Portal</CardTitle>
-                <CardDescription>
-                  Manage bookings, optimize routes, track earnings
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full bg-green-600 hover:bg-green-700">Access Cleaner Dashboard</Button>
-              </CardContent>
-            </Card>
-
-            <Card 
-              className="cursor-pointer hover:shadow-lg transition-shadow bg-white border-2 hover:border-orange-500"
-              onClick={() => setSelectedDashboard('company')}
-            >
-              <CardHeader>
-                <Building className="h-16 w-16 text-orange-600 mx-auto mb-4" />
-                <CardTitle>Company Portal</CardTitle>
-                <CardDescription>
-                  Manage cleaners, post services, track business performance
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full bg-orange-600 hover:bg-orange-700">Access Company Dashboard</Button>
-              </CardContent>
-            </Card>
-
-            <Card 
-              className="cursor-pointer hover:shadow-lg transition-shadow bg-white border-2 hover:border-purple-500"
-              onClick={() => setSelectedDashboard('admin')}
-            >
-              <CardHeader>
-                <Shield className="h-16 w-16 text-purple-600 mx-auto mb-4" />
-                <CardTitle>Admin Portal</CardTitle>
-                <CardDescription>
-                  System management, analytics, user oversight
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">Access Admin Dashboard</Button>
-              </CardContent>
-            </Card>
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <Calendar className="h-16 w-16 text-blue-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Flexible Scheduling
+            </h3>
+            <p className="text-gray-600">
+              Book services to fit your schedule, 24/7
+            </p>
           </div>
         </div>
       </div>

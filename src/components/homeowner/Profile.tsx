@@ -12,8 +12,8 @@ import { User, Mail, Phone, MapPin, Bell, Shield, CreditCard } from "lucide-reac
 
 const Profile = () => {
   const [profile, setProfile] = useState({
-    name: "Prince Ahmed",
-    email: "prince.ahmed@usiu.ac.ke",
+    name: "Prince Muuo",
+    email: "prince@gmail.com",
     phone: "+254 700 123 456",
     studentId: "USIU2024001",
     room: "Room 245, Block A",
