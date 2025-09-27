@@ -3,19 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Calendar, Star, Clock, MapPin, Shield, Building } from "lucide-react";
 import { useState } from "react";
-import { useAuth } from "@/components/auth/AuthProvider";
-import StudentDashboard from "@/components/StudentDashboard";
-import CleanerDashboard from "@/components/CleanerDashboard";
+import HomeOwnerDashboard from "@/components/HomeOwnerDashboard";import CleanerDashboard from "@/components/CleanerDashboard";
 import AdminDashboard from "@/components/AdminDashboard";
 import CompanyDashboard from "@/components/CompanyDashboard";
 
 const Index = () => {
-  const { user } = useAuth();
   const [selectedDashboard, setSelectedDashboard] = useState<string | null>(null);
 
   // Show selected dashboard based on user selection, not user role
-  if (selectedDashboard === 'student') {
-    return <StudentDashboard onBack={() => setSelectedDashboard(null)} />;
+  if (selectedDashboard === 'homeowner') {
+    return <HomeOwnerDashboard onBack={() => setSelectedDashboard(null)} />;
   }
 
   if (selectedDashboard === 'cleaner') {
@@ -46,25 +43,9 @@ const Index = () => {
             </h1>
           </div>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Revolutionary cleaning service platform connecting students with trusted professional cleaners and cleaning companies. 
+            Revolutionary cleaning service platform connecting homeowners with trusted professional cleaners and cleaning companies. 
             Experience seamless booking, real-time tracking, and premium quality service.
           </p>
-          
-          {user && (
-            <div className="mb-8 p-4 bg-white rounded-lg shadow-md max-w-md mx-auto">
-              <p className="text-sm text-gray-600">Welcome back, {user.name}!</p>
-              <p className="text-sm text-blue-600">Role: {user.role}</p>
-              {user.companyName && (
-                <p className="text-sm text-green-600">Company: {user.companyName}</p>
-              )}
-              <Button 
-                className="mt-2"
-                onClick={() => setSelectedDashboard(user.role)}
-              >
-                Go to My Dashboard
-              </Button>
-            </div>
-          )}
         </div>
 
         {/* Feature Cards */}
@@ -124,17 +105,17 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <Card 
               className="cursor-pointer hover:shadow-lg transition-shadow bg-white border-2 hover:border-blue-500"
-              onClick={() => setSelectedDashboard('student')}
+              onClick={() => setSelectedDashboard('homeowner')}
             >
               <CardHeader>
                 <Users className="h-16 w-16 text-blue-600 mx-auto mb-4" />
-                <CardTitle>Student Portal</CardTitle>
+                <CardTitle>Homeowner Portal</CardTitle>
                 <CardDescription>
                   Book cleaning services, track orders, manage payments
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full">Access Student Dashboard</Button>
+                <Button className="w-full">Access Homeowner Dashboard</Button>
               </CardContent>
             </Card>
 

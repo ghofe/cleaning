@@ -15,7 +15,7 @@ import {
   User,
   MessageSquare
 } from 'lucide-react';
-import { useAuth } from './auth/AuthProvider';
+
 import RealTimeUpdates from './features/RealTimeUpdates';
 import TwoFactorAuth from './features/TwoFactorAuth';
 import PaymentEscrow from './features/PaymentEscrow';
@@ -30,10 +30,10 @@ import ChatSystem from './messaging/ChatSystem';
 import LiveTracking from './homeowner/LiveTracking';
 
 const EnhancedDashboard = () => {
-  const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('overview');
-
-  if (!user) return null;
+  
+  // Mock profile data
+  const mockProfile = { role: 'homeowner', name: 'Demo User' };
 
   const getDashboardTabs = () => {
     const commonTabs = [
@@ -44,7 +44,7 @@ const EnhancedDashboard = () => {
     ];
 
     const roleSpecificTabs = {
-      student: [
+      homeowner: [
         { id: 'loyalty', label: 'Loyalty & Rewards', icon: CreditCard },
         { id: 'tracking', label: 'Live Tracking', icon: BarChart3 }
       ],
@@ -59,7 +59,7 @@ const EnhancedDashboard = () => {
       ]
     };
 
-    return [...commonTabs, ...(roleSpecificTabs[user.role] || [])];
+    return [...commonTabs, ...(roleSpecificTabs[mockProfile.role] || [])];
   };
 
   const tabs = getDashboardTabs();
@@ -79,7 +79,7 @@ const EnhancedDashboard = () => {
               CampusClean Hub
             </h1>
             <Badge variant="outline" className="text-sm">
-              {user.role.charAt(0).toUpperCase() + user.role.slice(1)} Dashboard
+              {mockProfile.role.charAt(0).toUpperCase() + mockProfile.role.slice(1)} Dashboard
             </Badge>
           </div>
           
@@ -89,13 +89,11 @@ const EnhancedDashboard = () => {
             
             <div className="flex items-center space-x-2 px-3 py-1 border rounded-lg">
               <User className="h-4 w-4" />
-              <span className="text-sm font-medium">{user.name}</span>
-              {user.verified && (
-                <Shield className="h-3 w-3 text-green-600" />
-              )}
+              <span className="text-sm font-medium">{mockProfile.name}</span>
+              <Shield className="h-3 w-3 text-green-600" />
             </div>
             
-            <Button variant="outline" size="sm" onClick={logout}>
+            <Button variant="outline" size="sm" onClick={() => window.location.reload()}>
               <LogOut className="h-4 w-4 mr-2" />
               Logout
             </Button>
@@ -119,26 +117,16 @@ const EnhancedDashboard = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Welcome Back, {user.name}!</CardTitle>
+                  <CardTitle>Welcome Back, {mockProfile.name}!</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">
-                    You're logged in as a {user.role}. Your account is{' '}
-                    {user.verified ? (
-                      <span className="text-green-600 font-medium">verified</span>
-                    ) : (
-                      <span className="text-red-600 font-medium">unverified</span>
-                    )}
+                    You're logged in as a {mockProfile.role}. Your account is verified.
                   </p>
                   <div className="mt-4 space-y-2">
                     <div className="text-sm">
-                      <span className="font-medium">Email:</span> {user.email}
+                      <span className="font-medium">Email:</span> demo@example.com
                     </div>
-                    {user.phone && (
-                      <div className="text-sm">
-                        <span className="font-medium">Phone:</span> {user.phone}
-                      </div>
-                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -204,12 +192,12 @@ const EnhancedDashboard = () => {
           <TabsContent value="messages">
             <ChatSystem 
               bookingId="BK123" 
-              userType={user.role as "student" | "cleaner"} 
+              userType={mockProfile.role === 'homeowner' ? 'student' : 'cleaner'} 
               recipientName="Jane Doe" 
             />
           </TabsContent>
 
-          {user.role === 'student' && (
+          {mockProfile.role === 'homeowner' && (
             <>
               <TabsContent value="loyalty">
                 <LoyaltyRewards />
@@ -220,7 +208,7 @@ const EnhancedDashboard = () => {
             </>
           )}
 
-          {user.role === 'cleaner' && (
+          {mockProfile.role === 'cleaner' && (
             <>
               <TabsContent value="inventory">
                 <InventoryManagement />
@@ -238,7 +226,7 @@ const EnhancedDashboard = () => {
             </>
           )}
 
-          {user.role === 'admin' && (
+          {mockProfile.role === 'admin' && (
             <>
               <TabsContent value="escrow">
                 <PaymentEscrow />

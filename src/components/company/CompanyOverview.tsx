@@ -1,17 +1,16 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Calendar, DollarSign, Star, TrendingUp, CheckCircle } from "lucide-react";
-import { useAuth } from "../auth/AuthProvider";
 
 const CompanyOverview = () => {
-  const { user } = useAuth();
+  const mockProfile = { company_name: "Demo Company" };
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Company Dashboard</h1>
         <p className="text-gray-600">
-          Welcome back, {user?.companyName || 'Company'}! Here's your business overview.
+          Welcome back, {mockProfile?.company_name || 'Company'}! Here's your business overview.
         </p>
       </div>
 

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,7 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Shield, Smartphone, Key, CheckCircle, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { useAuth } from '../auth/AuthProvider';
 
 const TwoFactorAuth = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -16,10 +14,8 @@ const TwoFactorAuth = () => {
   const [backupCodes, setBackupCodes] = useState<string[]>([]);
   const [showSetup, setShowSetup] = useState(false);
   const { toast } = useToast();
-  const { user } = useAuth();
 
   const generateQRCode = () => {
-    // Simulate QR code generation
     setQrCode('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjFmMWYxIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPjJGQSBRUiBDb2RlPC90ZXh0Pjwvc3ZnPg==');
     setBackupCodes([
       '1234-5678-9012',
@@ -59,7 +55,7 @@ const TwoFactorAuth = () => {
     });
   };
 
-  if (!user) return null;
+  
 
   return (
     <Card>
