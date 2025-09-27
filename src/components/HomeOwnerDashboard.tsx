@@ -72,7 +72,7 @@ const HomeownerDashboard = ({ onBack }: HomeownerDashboardProps) => {
               <AvatarFallback>PA</AvatarFallback>
             </Avatar>
             <div>
-              <p className="font-semibold">Prince Ahmed</p>
+              <p className="font-semibold">Prince Muuo</p>
               <p className="text-sm text-gray-500">Homeowner</p>
             </div>
           </div>
